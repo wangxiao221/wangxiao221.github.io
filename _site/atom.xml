@@ -4,7 +4,7 @@
  <title>rusty shutter</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com"/>
- <updated>2015-10-29T21:10:27-04:00</updated>
+ <updated>2015-10-29T21:18:12-04:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>wayne</name>
@@ -13,12 +13,12 @@
  
  <entry>
    <title>Fresh Start</title>
-   <link href="http://lhzhang.com/2015/10/15/m-always-waiting.html"/>
+   <link href="http://lhzhang.com/2015/10/15/fresh-start.html"/>
    <updated>2015-10-15T00:00:00-04:00</updated>
-   <id>urn:uuid:7ee46d88-b3ce-4f1f-bde0-2c753c6f926f</id>
+   <id>http://lhzhang.com/2015/10/15/fresh-start</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/media/files/2015/10/15/shangrila.jpg&quot; alt=&quot;Shangri-La&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;辞掉了做了十年的公司，放松一下下个月一切都要重头开始 @香格里拉&lt;/p&gt;
+&lt;p&gt;重新在GitHub上建立了新的Blog, 作为一个偶尔能够抒怀的小天地。微信、QQ空间都太浮躁，有时，发状态可能会期待别人的回复和关怀，但是有时候可能仅仅是想抒发一下感情吧。想保持低调隐世，又想抒发情怀，并且又想建立一个人生记录，这里可能是最理想而又安静的地方吧。。。&lt;/p&gt;
 </content>
  </entry>
  

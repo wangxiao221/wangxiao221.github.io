@@ -9,6 +9,6 @@ tags:
   - cf80
 ---
 
-[![](/media/files/2015/05/14/tree.jpg)](https://www.flickr.com/photos/lhzhang/17601296422/)
+![](/media/files/2015/05/14/tree.jpg)
 
 实在是很喜欢这张底片的样子，就省去了反色的步骤。

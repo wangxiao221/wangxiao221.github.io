@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="wayne" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <title>用Privoxy实现Socks代理转HTTP代理</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="rusty shutter" type="application/atom+xml" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/media/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script type="text/javascript"> hljs.initHighlightingOnLoad(); </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="rusty shutter" class="" href="/">rusty shutter</a></h1>
+          </div>
+          <nav>
+            
+            <span><a title="Archive" href="/archive.html"><i class="fa fa-list-ul"></i></a></span>
+            
+            <span><a title="Tags" href="/tags.html"><i class="fa fa-tags"></i></a></span>
+            
+            <span><a title="About" href="/about.html"><i class="fa fa-user"></i></a></span>
+            
+            <span><a title="Gallery" href="http://foto.lhzhang.com"><i class="fa fa-film"></i></a></span>
+            
+            <span><a title="Subscribe" href="/atom.xml"><i class="fa fa-rss"></i></a></span>
+            
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>用Privoxy实现Socks代理转HTTP代理 </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2008-07-11">2008-07-11</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#proxy" title="proxy">#proxy</a>
+    
+  </span>
+  <!-- BEGIN this would not work on any other domain -->
+  <span
+    class           = "like-wrapper"
+    like-shortname  = 'gopherwood'
+    like-identifier = 'urn:uuid:81933a79-c2f9-4631-a07d-c377b87abd32'
+    like-name       = '用Privoxy实现Socks代理转HTTP代理'
+    like-btn        = '&#xf087;'
+    like-link       = 'http://lhzhang.com/2008/07/11/socks-to-http-with-privoxy.html'
+    ></span>
+  <script type="text/javascript">
+    var l = document.createElement('script');
+    l.type = 'text/javascript'; l.async = true; l.src = 'http://www.like-btn.com/javascript/widget.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(l);
+  </script>
+  <!-- END this would not work on any other domain -->
+  
+  </section>
+  <section class="post">
+  <p>SSH端口动态转发只能实现Socks代理，但是并不是所有应用都支持Socks代理，比如Last.fm, Windows Live Writer, Opera...所以有个HTTP代理是很有必要的。</p>
+
+<p><a href="http://tinyproxy.banu.com/">tinyproxy</a>是<a href="http://joyus.org/blog/2008/06/socks-proxy-workaround-for-opera.html">不错</a>，可惜只支持POSIX OS。很无奈现在在公司处理普通的工作还是需要Windows。。。所以找到了<a href="http://www.privoxy.org">privoxy</a>，一个cross-platform的web proxy，支持包括广告过滤，cookie管理等很多高级功能，当然也有我们需要的socks转发</p>
+
+<p>设置非常非常简单:</p>
+
+<p>编辑privoxy安装目录下的config.txt，或者启动privoxy，在Options菜单里选择Edit Main Configuration也成。   <br/>
+在配置文件里加入listen-address和forward-socks4a的设置，例如
+    # 监听本地的8118端口并转发至8080端口 <br/>
+    listen-address 127.0.0.1:8118 <br/>
+    forward-socks4a / 127.0.0.1:8080</p>
+
+<p>需要注意的是：</p>
+
+<ul>
+<li>出于安全考虑，如果只给本机使用，listen-address的ip要设置成127.0.0.1，如果要给其他人共享，最好同时也设置permit-access（参考配置文件的说明）</li>
+<li>forward-socks4也可以做转发，和forward-socks4a的区别在与forward-socks4的dns解析发生在本地而socks4a发生在socks server上</li>
+</ul>
+
+
+<p>题外话：今儿iPhone发售，表参道那边儿已经有<a href="http://it.nikkei.co.jp/mobile/news/index.aspx?n=MMITfa000011072008">1500个哥们儿在排队</a>了。。。我。。。还是去打酱油吧</p>
+
+  </section>
+  
+  <div class="divider">
+    <span>
+    
+    <a href="/2008/07/02/import-mt-into-wordpress-with-tag-slug.html"><i class="fa fa-chevron-left"></i></a>
+    
+    </span>
+    <!-- BEGIN comment icon
+    <span><a href="javascript:leave_comment();" id="leave_comment_link"><i class="fa fa-comment-o"></i></a></span>
+    <span><a href="javascript:collapse_comment();" id="collapse_comment_link" style="display:none;"><i class="fa fa-chevron-up"></i></a></span>
+      END comment icon -->
+
+    <span>
+    
+    <a href="/2008/07/22/monkey-island.html"><i class="fa fa-chevron-right"></i></a>
+    
+    </span>
+  </div>
+
+  <!-- BEGIN comment
+  <section class="comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'gopherwood';
+      var disqus_identifier = 'urn:uuid:81933a79-c2f9-4631-a07d-c377b87abd32';
+
+      function leave_comment() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          $("#leave_comment_link").css("display", "none");
+          $("#collapse_comment_link").css("display", "");
+      };
+      function collapse_comment() {
+          // document.getElementById("disqus_thread").innerHTML = '';
+          $("#disqus_thread").slideUp(400, function() {
+              $("#disqus_thread").empty();
+              $("#leave_comment_link").css("display", "");
+              $("#collapse_comment_link").css("display", "none");
+              $("#disqus_thread").css("display", "");
+          });
+      };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </section>
+  END comment -->
+  
+</article>
+
+        </div>
+        <footer>
+          <div>
+            
+            &copy; 2006 ~ 2015 wayne | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/waynezhang/blog" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>

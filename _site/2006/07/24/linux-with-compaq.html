@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="wayne" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <title>在 linux 下驱动 Compaq 万通宝</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="rusty shutter" type="application/atom+xml" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/media/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script type="text/javascript"> hljs.initHighlightingOnLoad(); </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="rusty shutter" class="" href="/">rusty shutter</a></h1>
+          </div>
+          <nav>
+            
+            <span><a title="Archive" href="/archive.html"><i class="fa fa-list-ul"></i></a></span>
+            
+            <span><a title="Tags" href="/tags.html"><i class="fa fa-tags"></i></a></span>
+            
+            <span><a title="About" href="/about.html"><i class="fa fa-user"></i></a></span>
+            
+            <span><a title="Gallery" href="http://foto.lhzhang.com"><i class="fa fa-film"></i></a></span>
+            
+            <span><a title="Subscribe" href="/atom.xml"><i class="fa fa-rss"></i></a></span>
+            
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>在 linux 下驱动 Compaq 万通宝 </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2006-07-24">2006-07-24</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#linux" title="linux">#linux</a>
+    
+  </span>
+  <!-- BEGIN this would not work on any other domain -->
+  <span
+    class           = "like-wrapper"
+    like-shortname  = 'gopherwood'
+    like-identifier = 'urn:uuid:b87da13a-a4dd-402f-b06a-cef7eeee2d80'
+    like-name       = '在 linux 下驱动 Compaq 万通宝'
+    like-btn        = '&#xf087;'
+    like-link       = 'http://lhzhang.com/2006/07/24/linux-with-compaq.html'
+    ></span>
+  <script type="text/javascript">
+    var l = document.createElement('script');
+    l.type = 'text/javascript'; l.async = true; l.src = 'http://www.like-btn.com/javascript/widget.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(l);
+  </script>
+  <!-- END this would not work on any other domain -->
+  
+  </section>
+  <section class="post">
+  <p>近日完全转到 linux 了，不过 PocketPC 和万通宝的驱动是个大问题，Google 了好久，终于解决了万通宝的驱动，如下：</p>
+
+<p>万通宝的驱动要自己编译安装，所以我们必须先要安装一些必要的软件包，以ubuntu为例，debian及其它发行版会略有不同:</p>
+
+<p>我们需要的是 gcc，curl，cvs，以及与当前相对应的内核头文件</p>
+
+<pre><code>sudo apt-get install build-essential
+</code></pre>
+
+<p>以上命令可安装编译所需要的软件包如 gcc，cpp等，然后是安装 cvs</p>
+
+<pre><code>sudo apt-get install cvs
+</code></pre>
+
+<p>以及当前版本的内核头文件</p>
+
+<pre><code>sudo apt-get install linux-headers-`uname -r`
+</code></pre>
+
+<p>注意：` 符号是 tab 键上面数字 1 键左边那个，不是单引号</p>
+
+<p>然后是 curl</p>
+
+<pre><code>sudo apt-get install curl
+</code></pre>
+
+<p>以上是为了说明清楚一些，当然也可以一次性安装：</p>
+
+<pre><code>sudo apt-get install build-essential cvs linux-headers-`uname -r` curl
+</code></pre>
+
+<p>安装好必要的软件包后，我们需要从 cvs 上去 checkout 最新的驱动源码</p>
+
+<pre><code>cvs -z3 -d:pserver:anonymous@cvs.savannah.gnu.org:/cvsroot/orinoco co orinoco
+</code></pre>
+
+<p>然后编译驱动</p>
+
+<pre><code>cd orinoco
+
+make
+</code></pre>
+
+<p>编译正确完成后需要安装</p>
+
+<pre><code>sudo make install
+</code></pre>
+
+<p>之后我们需要去下载 windows 的 firmware，当然这个不用我们动手，已经有写好的脚本来完成了</p>
+
+<pre><code>cd firmware
+
+./get_ezusb_fw
+</code></pre>
+
+<p>将得到的 firmware 拷贝到 linux 内核的 firmware 目录中，在 dapper （ubuntu 6.06）中为 /lib/firmware/linux-kernel-xxx （xxx为内核版本）目录中，其它发行版视实际情况而定</p>
+
+<pre><code>sudo cp ./orinoco_ezusb_fw /lib/firmware/`uname -r`
+</code></pre>
+
+<p>现在我们可以尝试激活万通宝了</p>
+
+<pre><code>sudo modprobe -v orinoco_usb
+</code></pre>
+
+<p>看看万通宝的绿灯有没有亮，不亮的话则需要重启一下</p>
+
+<p>最后，保证系统在启动的时候自动加载万通宝模块，需要修改一下 /etc/modules 文件，在文件的末尾加一行</p>
+
+<pre><code>orinoco_usb
+</code></pre>
+
+<p>重启，进入桌面后看看，绿灯还不亮的话试下 Fn + F2，这样子应该差不多正常工作了，enjoy～</p>
+
+  </section>
+  
+  <div class="divider">
+    <span>
+    
+    <i class="fa fa-circle"></i>
+    
+    </span>
+    <!-- BEGIN comment icon
+    <span><a href="javascript:leave_comment();" id="leave_comment_link"><i class="fa fa-comment-o"></i></a></span>
+    <span><a href="javascript:collapse_comment();" id="collapse_comment_link" style="display:none;"><i class="fa fa-chevron-up"></i></a></span>
+      END comment icon -->
+
+    <span>
+    
+    <a href="/2006/07/29/linux-kaffeine-with-subtitle.html"><i class="fa fa-chevron-right"></i></a>
+    
+    </span>
+  </div>
+
+  <!-- BEGIN comment
+  <section class="comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'gopherwood';
+      var disqus_identifier = 'urn:uuid:b87da13a-a4dd-402f-b06a-cef7eeee2d80';
+
+      function leave_comment() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          $("#leave_comment_link").css("display", "none");
+          $("#collapse_comment_link").css("display", "");
+      };
+      function collapse_comment() {
+          // document.getElementById("disqus_thread").innerHTML = '';
+          $("#disqus_thread").slideUp(400, function() {
+              $("#disqus_thread").empty();
+              $("#leave_comment_link").css("display", "");
+              $("#collapse_comment_link").css("display", "none");
+              $("#disqus_thread").css("display", "");
+          });
+      };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </section>
+  END comment -->
+  
+</article>
+
+        </div>
+        <footer>
+          <div>
+            
+            &copy; 2006 ~ 2015 wayne | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/waynezhang/blog" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>

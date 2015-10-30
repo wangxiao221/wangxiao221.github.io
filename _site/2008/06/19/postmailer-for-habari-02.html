@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="wayne" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
+    <title>Postmailer for Habari 0.2</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="rusty shutter" type="application/atom+xml" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/media/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script type="text/javascript"> hljs.initHighlightingOnLoad(); </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="rusty shutter" class="" href="/">rusty shutter</a></h1>
+          </div>
+          <nav>
+            
+            <span><a title="Archive" href="/archive.html"><i class="fa fa-list-ul"></i></a></span>
+            
+            <span><a title="Tags" href="/tags.html"><i class="fa fa-tags"></i></a></span>
+            
+            <span><a title="About" href="/about.html"><i class="fa fa-user"></i></a></span>
+            
+            <span><a title="Gallery" href="http://foto.lhzhang.com"><i class="fa fa-film"></i></a></span>
+            
+            <span><a title="Subscribe" href="/atom.xml"><i class="fa fa-rss"></i></a></span>
+            
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>Postmailer for Habari 0.2 </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2008-06-19">2008-06-19</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#habari" title="habari">#habari</a>
+    
+    <a href="/tags.html#plugin" title="plugin">#plugin</a>
+    
+  </span>
+  <!-- BEGIN this would not work on any other domain -->
+  <span
+    class           = "like-wrapper"
+    like-shortname  = 'gopherwood'
+    like-identifier = 'urn:uuid:ad731a67-5f91-4777-a105-e3a256ea134e'
+    like-name       = 'Postmailer for Habari 0.2'
+    like-btn        = '&#xf087;'
+    like-link       = 'http://lhzhang.com/2008/06/19/postmailer-for-habari-02.html'
+    ></span>
+  <script type="text/javascript">
+    var l = document.createElement('script');
+    l.type = 'text/javascript'; l.async = true; l.src = 'http://www.like-btn.com/javascript/widget.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(l);
+  </script>
+  <!-- END this would not work on any other domain -->
+  
+  </section>
+  <section class="post">
+  <p><a href="http://habariproject.org/">habari</a>的trunk最近改动挺多, FormUI变的我之前的插件配置界面也出不来了, 而且插件option存储方式貌似也有所修改, 之前的pluginname:property的pattern已经无效, 全部改成了pluginname__property的样子.</p>
+
+<p>加之最近换到VPS, 又发现发出来的mail是乱码, 并且header也有问题, 检查了半天发现是header的换行我用了 rn, 众所周知这个是windows的换回, 而linux系统只要 r 就足够...真不晓得dreamhost上是怎么配的, 居然一直能跑. 把换行的地方用PHP_EOL代替, 加了点header信息, 再顺手把邮件body的部分也用base64编码了.</p>
+
+<p>很简单的小修正, 下载请至<del>原文</del></p>
+
+<p>--- 华丽的分割线 ---</p>
+
+<p>Changes in 0.2:</p>
+
+<ul>
+<li>Compatible with SVN r2802</li>
+<li>Add a little of information in mail header</li>
+<li>Fix End-Of-Line in Linux environment</li>
+<li>Encode message body with Base64</li>
+</ul>
+
+
+<p>Please download it in <del>original post</del></p>
+
+  </section>
+  
+  <div class="divider">
+    <span>
+    
+    <a href="/2008/06/08/otakuma.html"><i class="fa fa-chevron-left"></i></a>
+    
+    </span>
+    <!-- BEGIN comment icon
+    <span><a href="javascript:leave_comment();" id="leave_comment_link"><i class="fa fa-comment-o"></i></a></span>
+    <span><a href="javascript:collapse_comment();" id="collapse_comment_link" style="display:none;"><i class="fa fa-chevron-up"></i></a></span>
+      END comment icon -->
+
+    <span>
+    
+    <a href="/2008/06/23/highlight-code-with-vim.html"><i class="fa fa-chevron-right"></i></a>
+    
+    </span>
+  </div>
+
+  <!-- BEGIN comment
+  <section class="comment">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      var disqus_shortname = 'gopherwood';
+      var disqus_identifier = 'urn:uuid:ad731a67-5f91-4777-a105-e3a256ea134e';
+
+      function leave_comment() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          $("#leave_comment_link").css("display", "none");
+          $("#collapse_comment_link").css("display", "");
+      };
+      function collapse_comment() {
+          // document.getElementById("disqus_thread").innerHTML = '';
+          $("#disqus_thread").slideUp(400, function() {
+              $("#disqus_thread").empty();
+              $("#leave_comment_link").css("display", "");
+              $("#collapse_comment_link").css("display", "none");
+              $("#disqus_thread").css("display", "");
+          });
+      };
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </section>
+  END comment -->
+  
+</article>
+
+        </div>
+        <footer>
+          <div>
+            
+            &copy; 2006 ~ 2015 wayne | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/waynezhang/blog" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>
